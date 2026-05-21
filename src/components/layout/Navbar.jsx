@@ -20,7 +20,7 @@ export default function Navbar() {
   }, [darkMode]);
 
   return (
-    <nav className="flex items-center justify-between px-12 py-4 bg-background border-b">
+    <nav className="flex items-center justify-between px-12 py-4 bg-primary-foreground border-b">
       {/* LOGO */}
       <Link to="/" className="text-[1.7rem] font-sans">
         <span className="bg-[linear-gradient(135deg,var(--warning),var(--primary))] bg-clip-text text-transparent font-bold">
