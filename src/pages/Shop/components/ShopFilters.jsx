@@ -15,7 +15,7 @@ export default function ShopFilters() {
   ];
 
   return (
-    <div className="w-[96%] mx-auto mb-8">
+    <div className="w-full mx-auto mb-8">
       {/* FILTER BAR */}
       <div
         className="
