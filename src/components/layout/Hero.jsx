@@ -2,40 +2,70 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
+  const sectionRef = useRef(null);
   const glowRef = useRef(null);
 
   useEffect(() => {
-    const move = (e) => {
-      if (!glowRef.current) return;
+    const section = sectionRef.current;
+    const glow = glowRef.current;
 
-      glowRef.current.style.left = `${e.clientX}px`;
-      glowRef.current.style.top = `${e.clientY}px`;
-      glowRef.current.style.opacity = "1";
+    if (!section || !glow) return;
+
+    const handleMouseMove = (e) => {
+      const rect = section.getBoundingClientRect();
+
+      // Mouse position relative to HERO section
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      glow.style.left = `${x}px`;
+      glow.style.top = `${y}px`;
+      glow.style.opacity = "1";
     };
 
-    const leave = () => {
-      if (glowRef.current) glowRef.current.style.opacity = "0";
+    const handleMouseLeave = () => {
+      glow.style.opacity = "0";
     };
 
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseleave", leave);
+    section.addEventListener("mousemove", handleMouseMove);
+    section.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseleave", leave);
+      section.removeEventListener("mousemove", handleMouseMove);
+      section.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 
   return (
-    <section className="relative flex flex-col items-center justify-center text-center px-6 py-24 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="
+        relative
+        flex flex-col items-center justify-center
+        text-center
+        px-6 py-24
+        overflow-hidden
+      "
+    >
       {/* MOUSE GLOW */}
       <div
         ref={glowRef}
         className="
-          fixed w-55 h-55 rounded-full pointer-events-none z-0
-          opacity-0 transition-opacity duration-300 blur-2xl
-          -translate-x-1/2 -translate-y-1/2
-          bg-[radial-gradient(circle,rgba(255,107,53,0.18)_0%,transparent_60%)]
+          absolute
+          w-50 h-50
+          rounded-full
+          pointer-events-none
+          z-0
+
+          opacity-0
+          transition-opacity duration-300
+
+          -translate-x-1/2
+          -translate-y-1/2
+
+          bg-[radial-gradient(circle,rgba(255,107,53,0.18)_0%,rgba(255,107,53,0.12)_20%,rgba(255,107,53,0.06)_40%,transparent_60%)]
+
+          dark:bg-[radial-gradient(circle,rgba(6,182,212,0.18)_0%,rgba(6,182,212,0.12)_20%,rgba(6,182,212,0.06)_40%,transparent_60%)]
         "
       />
 
@@ -54,7 +84,8 @@ export default function Hero() {
             mb-6
 
             bg-[linear-gradient(135deg,var(--foreground),var(--muted-foreground))]
-            bg-clip-text text-transparent
+            bg-clip-text
+            text-transparent
 
             drop-shadow-[3px_3px_0px_rgba(255,107,53,0.25)]
 
@@ -63,15 +94,17 @@ export default function Hero() {
         >
           Your Essential Style,
           <br />
+
           <span
             className="
               block
-
-              text-[clamp(2.6rem,6vw,4.6rem)]
               leading-tight
 
-              bg-[linear-gradient(135deg,var(--primary))]
-              bg-clip-text text-transparent
+              text-[clamp(2.6rem,6vw,4.6rem)]
+
+              bg-[linear-gradient(135deg,var(--primary),var(--warning))]
+              bg-clip-text
+              text-transparent
 
               drop-shadow-[3px_3px_0px_rgba(255,107,53,0.4)]
 
@@ -83,9 +116,24 @@ export default function Hero() {
         </h1>
 
         {/* DESCRIPTION */}
-        <p className="text-muted-foreground text-[clamp(1.1rem,2.5vw,1.25rem)] leading-7 mb-10 max-w-2xl">
+        <p
+          className="
+            text-muted-foreground
+            text-[clamp(1.2rem,2.7vw,1.35rem)]
+            leading-8
+            mb-10
+            max-w-2xl
+          "
+        >
           Welcome to{" "}
-          <span className="font-bold text-transparent bg-clip-text bg-[linear-gradient(135deg,var(--primary),var(--warning))]">
+          <span
+            className="
+              font-bold
+              text-transparent
+              bg-clip-text
+              bg-[linear-gradient(135deg,var(--primary),var(--warning))]
+            "
+          >
             The Edit
           </span>{" "}
           – where quality, consciousness, and timeless design converge. We
@@ -97,15 +145,26 @@ export default function Hero() {
         <Link to="/shop">
           <button
             className="
-              px-6 py-3
-              bg-primary text-primary-foreground
+              px-7 py-3.5
+
               rounded-xl
-              cursor-pointer
+
+              bg-[linear-gradient(135deg,var(--primary),var(--warning))]
+              text-primary-foreground
+
               font-[Bungee]
               text-[1.05rem]
               tracking-tight
 
-              transition hover:opacity-90
+              cursor-pointer
+
+              shadow-[0_4px_12px_rgba(255,107,53,0.25)]
+
+              transition-all duration-200
+
+              hover:-translate-y-0.5
+              hover:scale-[1.02]
+              hover:shadow-[0_8px_25px_rgba(255,107,53,0.35)]
             "
           >
             Explore The Collection
