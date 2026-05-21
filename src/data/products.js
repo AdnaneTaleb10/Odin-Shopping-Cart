@@ -77,16 +77,6 @@ const rawProducts = [
     slug: 'classic-comfort-fit-joggers',
   },
   {
-    id: 'f6f635a9-61e4-42ca-aba9-634f75560914',
-    title: 'Classic Comfort Drawstring Joggers',
-    description:
-      'Experience the perfect blend of comfort and style with our Classic Comfort Drawstring Joggers. Designed for a relaxed fit, these joggers feature a soft, stretchable fabric, convenient side pockets, and an adjustable drawstring waist with elegant gold-tipped detailing. Ideal for lounging or running errands, these pants will quickly become your go-to for effortless, casual wear.',
-    price: 79,
-    images: 'https://i.imgur.com/mp3rUty.jpeg,https://i.imgur.com/JQRGIc2.jpeg',
-    category_id: '1',
-    slug: 'classic-comfort-drawstring-joggers',
-  },
-  {
     id: '6886dbd4-2818-48b0-b80b-870c131a6cbb',
     title: 'Classic Red Jogger Sweatpants',
     description:
@@ -150,17 +140,6 @@ const rawProducts = [
     images: 'https://i.imgur.com/UsFIvYs.jpeg,https://i.imgur.com/YIq57b6.jpeg',
     category_id: '1',
     slug: 'classic-olive-chino-shorts',
-  },
-  {
-    id: '019d1132-a618-4dcc-8530-02d28ce9d92d',
-    title: 'Classic High-Waisted Athletic Shorts',
-    description:
-      'Stay comfortable and stylish with our Classic High-Waisted Athletic Shorts. Designed for optimal movement and versatility, these shorts are a must-have for your workout wardrobe. Featuring a figure-flattering high waist, breathable fabric, and a secure fit that ensures they stay in place during any activity, these shorts are perfect for the gym, running, or even just casual wear.',
-    price: 43,
-    images:
-      'https://i.imgur.com/eGOUveI.jpeg,https://i.imgur.com/UcsGO7E.jpeg,https://i.imgur.com/NLn4e7S.jpeg',
-    category_id: '1',
-    slug: 'classic-high-waisted-athletic-shorts',
   },
   {
     id: '4e03f778-5e34-487e-8b99-9d04f74cf2b2',
@@ -446,17 +425,6 @@ const rawProducts = [
       'https://i.imgur.com/npLfCGq.jpeg,https://i.imgur.com/vYim3gj.jpeg,https://i.imgur.com/HxuHwBO.jpeg',
     category_id: '4',
     slug: 'futuristic-silver-and-gold-high-top-sneaker',
-  },
-  {
-    id: '8d2f499a-2605-46f5-877e-d8751333eaec',
-    title: 'Futuristic Chic High-Heel Boots',
-    description:
-      'Elevate your style with our cutting-edge high-heel boots that blend bold design with avant-garde aesthetics. These boots feature a unique color-block heel, a sleek silhouette, and a versatile light grey finish that pairs easily with any cutting-edge outfit. Crafted for the fashion-forward individual, these boots are sure to make a statement.',
-    price: 36,
-    images:
-      'https://i.imgur.com/HqYqLnW.jpeg,https://i.imgur.com/RlDGnZw.jpeg,https://i.imgur.com/qa0O6fg.jpeg',
-    category_id: '4',
-    slug: 'futuristic-chic-high-heel-boots',
   },
   {
     id: 'e06c9e4f-4206-4935-8c01-bc1efeb699fd',
