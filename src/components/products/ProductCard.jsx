@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function ProductCard({ title, slug, img, price }) {
+export default function ProductCard({ product, cartItem, onAddToCart }) {
   const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    if (cartItem) {
+      setQuantity(cartItem.quantity);
+    } else {
+      setQuantity(1);
+    }
+  }, [cartItem]);
 
   const increaseQuantity = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
@@ -12,6 +20,9 @@ export default function ProductCard({ title, slug, img, price }) {
   const decreaseQuantity = () => {
     setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
   };
+
+  const isInCart = !!cartItem;
+  const buttonLabel = isInCart ? "Update" : "Add";
 
   return (
     <div
@@ -31,12 +42,12 @@ export default function ProductCard({ title, slug, img, price }) {
     >
       {/* IMAGE */}
       <Link
-        to={`/shop/${slug}`}
+        to={`/shop/${product.slug}`}
         className="aspect-square overflow-hidden bg-muted"
       >
         <img
-          src={img}
-          alt={title}
+          src={product.images[0]}
+          alt={product.title}
           className="
             w-full h-full object-cover
             transition-transform duration-300 ease-out
@@ -50,16 +61,19 @@ export default function ProductCard({ title, slug, img, price }) {
         {/* TITLE + PRICE */}
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-semibold line-clamp-2 text-foreground">
-            {title}
+            {product.title}
           </h2>
-          <p className="text-lg text-primary font-bold">${price}</p>
+          <p className="text-lg text-primary font-bold">${product.price}</p>
         </div>
 
         {/* ACTIONS */}
         <div className="flex flex-row items-center justify-between gap-3 mt-auto">
           {/* COUNTER */}
           <div className="flex items-center justify-center border border-border rounded-lg overflow-hidden w-fit sm:w-auto">
-            <button className="px-3 py-2 font-bold hover:bg-accent transition" onClick={decreaseQuantity}>
+            <button
+              className="px-3 py-2 font-bold hover:bg-accent transition"
+              onClick={decreaseQuantity}
+            >
               -
             </button>
 
@@ -97,9 +111,10 @@ export default function ProductCard({ title, slug, img, price }) {
               hover:opacity-90 active:scale-[0.98]
               transition
             "
+            onClick={() => onAddToCart(product, quantity)}
           >
             <ShoppingCart size={16} />
-            Add
+            {buttonLabel}
           </button>
         </div>
       </div>

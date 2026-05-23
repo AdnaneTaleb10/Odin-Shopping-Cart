@@ -5,6 +5,7 @@ import "./index.css";
 import Home from "./pages/Home/Home";
 import Layout from "./components/layout/Layout";
 import Shop from "./pages/Shop/Shop";
+import { Toaster } from "sonner";
 
 /* const router = createBrowserRouter([{ path: "/", element: <Home /> }]); */
 
@@ -25,5 +26,6 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />
+    <Toaster richColors position="top-right" />
   </StrictMode>,
 );

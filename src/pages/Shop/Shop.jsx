@@ -3,9 +3,48 @@ import ShopFilters from "./components/ShopFilters";
 import ShopHeader from "./components/ShopHeader";
 import { allProducts } from "@/data/products";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Shop() {
+  const [cart, setCart] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([...allProducts]);
+
+  const handleAddToCart = (product, quantity) => {
+    setCart((prev) => {
+      const existing = prev.find((item) => item.productId === product.id);
+
+      // REMOVE ITEM (quantity = 0)
+      if (quantity === 0) {
+        toast.warning(`${product.title} Removed from cart`);
+
+        return prev.filter((item) => item.productId !== product.id);
+      }
+
+      // UPDATE EXISTING
+      if (existing) {
+        toast.info("Cart updated");
+
+        return prev.map((item) =>
+          item.productId === product.id ? { ...item, quantity } : item,
+        );
+      }
+
+      // ADD NEW
+      toast.success("Added to cart", {
+        description: `${product.title} × ${quantity}`,
+      });
+
+      return [
+        ...prev,
+        {
+          productId: product.id,
+          title: product.title,
+          price: product.price,
+          quantity,
+        },
+      ];
+    });
+  };
 
   const handleFilter = (filterType) => {
     if (filterType !== "All") {
@@ -14,7 +53,12 @@ export default function Shop() {
       );
     } else {
       setFilteredProducts(allProducts);
+      console.log(allProducts);
     }
+  };
+
+  const getCartItem = (productId) => {
+    return cart.find((item) => item.productId === productId);
   };
 
   return (
@@ -25,10 +69,9 @@ export default function Shop() {
         {filteredProducts.map((product) => (
           <ProductCard
             key={product.id}
-            title={product.title}
-            slug={product.slug}
-            img={product.images[0]}
-            price={product.price}
+            product={product}
+            cartItem={getCartItem(product.id)}
+            onAddToCart={handleAddToCart}
           />
         ))}
       </div>
