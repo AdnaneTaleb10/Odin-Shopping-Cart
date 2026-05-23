@@ -11,8 +11,8 @@ import { useEffect, useState } from "react";
 export default function Navbar() {
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Shop", path: "/shop", icon: ShoppingCart },
-    { name: "Cart", path: "/cart" },
+    { name: "Shop", path: "/shop" },
+    { name: "Cart", path: "/cart", icon: ShoppingCart },
   ];
 
   const [darkMode, setDarkMode] = useState(false);

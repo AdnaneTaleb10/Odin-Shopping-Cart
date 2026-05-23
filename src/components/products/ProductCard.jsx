@@ -38,16 +38,16 @@ export default function ProductCard({ title, slug, img, price }) {
       <div className="p-4 flex flex-col gap-4 flex-1">
         {/* TITLE + PRICE */}
         <div className="flex flex-col gap-1">
-          <h2 className="text-sm font-semibold line-clamp-2 text-foreground">
+          <h2 className="text-lg font-semibold line-clamp-2 text-foreground">
             {title}
           </h2>
-          <p className="text-primary font-bold">${price}</p>
+          <p className="text-lg text-primary font-bold">${price}</p>
         </div>
 
         {/* ACTIONS */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-3 mt-auto">
+        <div className="flex flex-row items-center justify-between gap-3 mt-auto">
           {/* COUNTER */}
-          <div className="flex items-center border border-border rounded-lg overflow-hidden w-full sm:w-auto">
+          <div className="flex items-center justify-center border border-border rounded-lg overflow-hidden w-fit sm:w-auto">
             <button className="px-3 py-2 font-bold hover:bg-accent transition">
               -
             </button>
@@ -76,9 +76,9 @@ export default function ProductCard({ title, slug, img, price }) {
           <button
             className="
               flex items-center justify-center gap-2
-              bg-primary text-primary-foreground
+              bg-primary font-semibold text-primary-foreground
               px-6 py-2 rounded-lg
-              w-full sm:w-auto
+              w-fit sm:w-auto
               hover:opacity-90 active:scale-[0.98]
               transition
             "

@@ -1,6 +1,6 @@
 export default function ShopHeader() {
   return (
-    <div className="text-center py-8 px-6">
+    <div className="text-center p-6">
       <h1
         className="
           font-sans

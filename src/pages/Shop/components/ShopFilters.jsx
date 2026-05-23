@@ -74,11 +74,12 @@ export default function ShopFilters() {
                 key={category}
                 onClick={() => setActive(category)}
                 className={`
+                  
                   flex-1 basis-35
                   py-5
                   rounded-xl
                   border
-                  text-sm font-medium
+                  text-base font-semibold
                   capitalize
                   transition-all duration-300
 
