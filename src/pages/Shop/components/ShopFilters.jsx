@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Search, X } from "lucide-react";
 import { useState } from "react";
 
-export default function ShopFilters() {
+export default function ShopFilters({ handleFilter }) {
   const [active, setActive] = useState("All");
 
   const categories = [
@@ -72,7 +72,10 @@ export default function ShopFilters() {
             return (
               <Button
                 key={category}
-                onClick={() => setActive(category)}
+                onClick={() => {
+                  setActive(category);
+                  handleFilter(category);
+                }}
                 className={`
                   
                   flex-1 basis-35
