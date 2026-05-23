@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
+import { useState } from "react";
 
 export default function ProductCard({ title, slug, img, price }) {
+  const [quantity, setQuantity] = useState(1);
+
+  const increaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
+  };
+
   return (
     <div
       className="
@@ -48,13 +59,14 @@ export default function ProductCard({ title, slug, img, price }) {
         <div className="flex flex-row items-center justify-between gap-3 mt-auto">
           {/* COUNTER */}
           <div className="flex items-center justify-center border border-border rounded-lg overflow-hidden w-fit sm:w-auto">
-            <button className="px-3 py-2 font-bold hover:bg-accent transition">
+            <button className="px-3 py-2 font-bold hover:bg-accent transition" onClick={decreaseQuantity}>
               -
             </button>
 
             <input
               type="number"
-              defaultValue={1}
+              value={quantity}
+              readOnly
               className="
                 w-10
                 text-center
@@ -67,7 +79,10 @@ export default function ProductCard({ title, slug, img, price }) {
               "
             />
 
-            <button className="px-3 py-2 font-bold hover:bg-accent transition">
+            <button
+              className="px-3 py-2 font-bold hover:bg-accent transition"
+              onClick={increaseQuantity}
+            >
               +
             </button>
           </div>
