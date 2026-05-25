@@ -1,17 +1,11 @@
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 
-export default function ProductCard({ product, cartItem, onAddToCart }) {
+export default function ProductCard({ product }) {
+  const { handleAddToCart, getCartItem } = useOutletContext();
   const [quantity, setQuantity] = useState(1);
-
-  useEffect(() => {
-    if (cartItem) {
-      setQuantity(cartItem.quantity);
-    } else {
-      setQuantity(1);
-    }
-  }, [cartItem]);
 
   const increaseQuantity = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
@@ -20,6 +14,16 @@ export default function ProductCard({ product, cartItem, onAddToCart }) {
   const decreaseQuantity = () => {
     setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
   };
+
+  const cartItem = getCartItem(product.id);
+
+  useEffect(() => {
+    if (cartItem) {
+      setQuantity(cartItem.quantity);
+    } else {
+      setQuantity(1);
+    }
+  }, [cartItem]);
 
   const isInCart = !!cartItem;
   const buttonLabel = isInCart ? "Update" : "Add";
@@ -111,7 +115,7 @@ export default function ProductCard({ product, cartItem, onAddToCart }) {
               hover:opacity-90 active:scale-[0.98]
               transition
             "
-            onClick={() => onAddToCart(product, quantity)}
+            onClick={() => handleAddToCart(product, quantity)}
           >
             <ShoppingCart size={16} />
             {buttonLabel}
