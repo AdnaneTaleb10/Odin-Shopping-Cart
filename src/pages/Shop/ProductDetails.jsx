@@ -18,7 +18,8 @@ export default function ProductDetails() {
 
   useEffect(() => {
     setSelectedImage(product?.images[0]);
-    setQuantity(0)
+    setQuantity(0);
+    window.scrollTo(0, 0);
   }, [product]);
 
   const buttonLabel = cartItem ? "Update Cart" : "Add to Cart";
