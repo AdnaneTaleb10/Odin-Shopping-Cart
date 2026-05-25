@@ -2,36 +2,48 @@ import ProductCard from "@/components/products/ProductCard";
 import ShopFilters from "./components/ShopFilters";
 import ShopHeader from "./components/ShopHeader";
 import { allProducts } from "@/data/products";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { useOutletContext } from "react-router-dom";
 
 export default function Shop() {
   const [cart, setCart] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([...allProducts]);
 
+  const { setNumberOfItems } = useOutletContext();
+
+  useEffect(() => {
+    setNumberOfItems(cart.length);
+  }, [cart, setNumberOfItems]);
+
   const handleAddToCart = (product, quantity) => {
     setCart((prev) => {
       const existing = prev.find((item) => item.productId === product.id);
 
-      // REMOVE ITEM (quantity = 0)
+      // REMOVE
       if (quantity === 0) {
-        toast.warning(`${product.title} Removed from cart`);
+        toast.warning(`${product.title} Removed from cart`, {
+          id: `remove-${product.id}`,
+        });
 
         return prev.filter((item) => item.productId !== product.id);
       }
 
-      // UPDATE EXISTING
+      // UPDATE
       if (existing) {
-        toast.info("Cart updated");
+        toast.info("Cart updated", {
+          id: `update-${product.id}`,
+        });
 
         return prev.map((item) =>
           item.productId === product.id ? { ...item, quantity } : item,
         );
       }
 
-      // ADD NEW
+      // ADD
       toast.success("Added to cart", {
+        id: `add-${product.id}`,
         description: `${product.title} × ${quantity}`,
       });
 
@@ -46,7 +58,6 @@ export default function Shop() {
       ];
     });
   };
-
   const handleFilter = (filterType) => {
     if (filterType !== "All") {
       setFilteredProducts(

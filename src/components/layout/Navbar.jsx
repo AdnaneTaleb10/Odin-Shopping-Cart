@@ -1,14 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
-import {
-  ShoppingCart,
-  Moon,
-  Sun,
-  Menu,
-  X,
-} from "lucide-react";
+import { ShoppingCart, Moon, Sun, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
-export default function Navbar() {
+export default function Navbar({numberOfItems}) {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "Shop", path: "/shop" },
@@ -30,7 +25,6 @@ export default function Navbar() {
     <nav className="border-b bg-primary-foreground">
       {/* TOP ROW */}
       <div className="flex items-center justify-between px-4 sm:px-6 lg:px-12 py-4">
-        
         {/* LOGO */}
         <Link to="/" className="text-[1.7rem] font-sans">
           <span className="bg-[linear-gradient(135deg,var(--warning),var(--primary))] bg-clip-text text-transparent font-bold">
@@ -46,6 +40,7 @@ export default function Navbar() {
                 to={item.path}
                 className={({ isActive }) => `
                   flex items-center gap-2
+                  relative
                   px-4 py-2
                   rounded-lg
                   text-[0.95rem]
@@ -61,6 +56,38 @@ export default function Navbar() {
                 `}
               >
                 {item.icon && <item.icon size={16} />}
+                {(numberOfItems > 0 && item.icon) && (
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.08, 1],
+                    }}
+                    transition={{
+                      duration: 1.8,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    className="
+    absolute top-0 right-0
+    translate-x-1/2 -translate-y-1/2
+
+    w-5 h-5
+    rounded-full
+
+    flex items-center justify-center
+
+    bg-primary
+    text-primary-foreground
+
+    text-[11px]
+    font-bold
+    leading-none
+
+    will-change-transform
+  "
+                  >
+                    {numberOfItems}
+                  </motion.div>
+                )}
                 {item.name}
               </NavLink>
             </li>
@@ -98,7 +125,6 @@ export default function Navbar() {
 
         {/* MOBILE ACTIONS */}
         <div className="flex items-center gap-2 md:hidden">
-          
           {/* THEME BUTTON */}
           <button
             onClick={() => setDarkMode(!darkMode)}
@@ -149,11 +175,7 @@ export default function Navbar() {
           overflow-hidden
           transition-all duration-300 ease-in-out
 
-          ${
-            menuOpen
-              ? "max-h-96 opacity-100"
-              : "max-h-0 opacity-0"
-          }
+          ${menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}
         `}
       >
         <div className="flex flex-col gap-2 px-4 pb-4">
