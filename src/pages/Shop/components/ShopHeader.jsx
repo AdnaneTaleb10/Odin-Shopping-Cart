@@ -1,6 +1,13 @@
+import { motion } from "framer-motion";
+
 export default function ShopHeader() {
   return (
-    <div className="text-center p-6">
+    <motion.div
+      initial={{ opacity: 0, y: -30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="text-center p-6"
+    >
       <h1
         className="
           font-sans
@@ -33,6 +40,6 @@ export default function ShopHeader() {
         Timeless design and modern craftsmanship. Discover high-quality pieces
         for every occasion.
       </p>
-    </div>
+    </motion.div>
   );
 }
