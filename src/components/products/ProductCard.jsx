@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function ProductCard({ product, cartItem, onAddToCart }) {
   const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (cartItem) {
@@ -42,7 +43,7 @@ export default function ProductCard({ product, cartItem, onAddToCart }) {
     >
       {/* IMAGE */}
       <Link
-        to={`/shop/${product.slug}`}
+        to={`/shop/${product.id}`}
         className="aspect-square overflow-hidden bg-muted"
       >
         <img

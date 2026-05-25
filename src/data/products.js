@@ -66,17 +66,6 @@ const rawProducts = [
     slug: 'classic-black-hooded-sweatshirt',
   },
   {
-    id: '02064888-f93e-44e2-8504-d4dbbab6ce7b',
-    title: 'Classic Comfort Fit Joggers',
-    description:
-      'Discover the perfect blend of style and comfort with our Classic Comfort Fit Joggers. These versatile black joggers feature a soft elastic waistband with an adjustable drawstring, two side pockets, and ribbed ankle cuffs for a secure fit. Made from a lightweight and durable fabric, they are ideal for both active days and relaxed lounging.',
-    price: 25,
-    images:
-      'https://i.imgur.com/ZKGofuB.jpeg,https://i.imgur.com/GJi73H0.jpeg,https://i.imgur.com/633Fqrz.jpeg',
-    category_id: '1',
-    slug: 'classic-comfort-fit-joggers',
-  },
-  {
     id: '6886dbd4-2818-48b0-b80b-870c131a6cbb',
     title: 'Classic Red Jogger Sweatpants',
     description:
