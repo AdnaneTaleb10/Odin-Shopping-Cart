@@ -3,6 +3,7 @@ import { allProducts } from "@/data/products";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ShoppingCart } from "lucide-react";
+import ProductCard from "@/components/products/ProductCard";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -10,6 +11,11 @@ export default function ProductDetails() {
 
   const [selectedImage, setSelectedImage] = useState(product?.images[0]);
   const [quantity, setQuantity] = useState(1);
+
+  // Related products: same category, excluding current
+  const relatedProducts = allProducts.filter(
+    (item) => item.category.name === product?.category.name && item.id !== product?.id
+  );
 
   if (!product) {
     return (
@@ -175,6 +181,36 @@ export default function ProductDetails() {
           </div>
         </div>
       </div>
+
+      {/* RELATED PRODUCTS */}
+      {relatedProducts.length > 0 && (
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="w-full mt-8"
+        >
+          <h2 className="
+            text-center font-bold mb-8
+            text-[clamp(1.5rem,3vw,2rem)] tracking-tight
+            bg-linear-to-br from-foreground to-muted-foreground
+            bg-clip-text text-transparent
+          ">
+            You might also like
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 w-full">
+            {relatedProducts.map((item) => (
+              <ProductCard
+                key={item.id}
+                product={item}
+                cartItem={undefined}
+                onAddToCart={() => {}}
+              />
+            ))}
+          </div>
+        </motion.section>
+      )}
     </motion.div>
   );
 }
