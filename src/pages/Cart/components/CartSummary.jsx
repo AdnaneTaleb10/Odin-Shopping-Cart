@@ -1,4 +1,14 @@
+import confetti from "canvas-confetti";
+
 export default function CartSummary({ cart }) {
+  const handleCheckout = () => {
+    confetti({
+      particleCount: 120,
+      spread: 90,
+      origin: { y: 0.7 },
+    });
+  };
+
   const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0,
@@ -23,9 +33,7 @@ export default function CartSummary({ cart }) {
     >
       {/* HEADER */}
       <div className="pb-5 border-b border-border">
-        <h2 className="text-2xl font-bold tracking-tight">
-          Order Summary
-        </h2>
+        <h2 className="text-2xl font-bold tracking-tight">Order Summary</h2>
 
         <p className="text-sm text-muted-foreground mt-1">
           Review your final order details.
@@ -56,9 +64,7 @@ export default function CartSummary({ cart }) {
         <div className="flex items-center justify-between">
           <p className="text-muted-foreground">Tax (8%)</p>
 
-          <p className="font-semibold text-foreground">
-            ${tax.toFixed(2)}
-          </p>
+          <p className="font-semibold text-foreground">${tax.toFixed(2)}</p>
         </div>
       </div>
 
@@ -85,6 +91,7 @@ export default function CartSummary({ cart }) {
 
       {/* CHECKOUT BUTTON */}
       <button
+        onClick={handleCheckout}
         className="
           mt-6
           w-full
