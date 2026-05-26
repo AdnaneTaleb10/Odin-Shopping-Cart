@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Search, X } from "lucide-react";
-import { useState } from "react";
 
-export default function ShopFilters({ handleFilter }) {
-  const [active, setActive] = useState("All");
-
+export default function ShopFilters({
+  activeCategory,
+  setActiveCategory,
+  searchText,
+  setSearchText,
+}) {
   const categories = [
     "All",
     "Clothes",
@@ -16,7 +18,6 @@ export default function ShopFilters({ handleFilter }) {
 
   return (
     <div className="w-full mx-auto mb-8">
-      {/* FILTER BAR */}
       <div
         className="
           flex flex-wrap items-center gap-4
@@ -35,6 +36,8 @@ export default function ShopFilters({ handleFilter }) {
 
           <input
             type="text"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
             placeholder="Search products..."
             className="
               w-full
@@ -49,35 +52,29 @@ export default function ShopFilters({ handleFilter }) {
             "
           />
 
-          <X
-            size={16}
-            className="
-              absolute right-3 top-1/2 -translate-y-1/2
-              text-muted-foreground
-              cursor-pointer
-            "
-          />
+          {searchText && (
+            <X
+              size={16}
+              onClick={() => setSearchText("")}
+              className="
+                absolute right-3 top-1/2 -translate-y-1/2
+                text-muted-foreground
+                cursor-pointer
+              "
+            />
+          )}
         </div>
 
         {/* BUTTONS */}
-        <div
-          className="
-            flex flex-1 flex-wrap gap-2
-            min-w-0
-          "
-        >
+        <div className="flex flex-1 flex-wrap gap-2 min-w-0">
           {categories.map((category) => {
-            const isActive = active === category;
+            const isActive = activeCategory === category;
 
             return (
               <Button
                 key={category}
-                onClick={() => {
-                  setActive(category);
-                  handleFilter(category);
-                }}
+                onClick={() => setActiveCategory(category)}
                 className={`
-                  
                   flex-1 basis-35
                   py-5
                   rounded-xl
