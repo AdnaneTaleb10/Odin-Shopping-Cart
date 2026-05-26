@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { useOutletContext } from "react-router-dom";
 import EmptyCart from "./components/EmptyCart";
+import CartList from "./components/CartList";
+import CartSummary from "./components/CartSummary";
 
 export default function Cart() {
   const { cart } = useOutletContext();
@@ -32,7 +34,10 @@ export default function Cart() {
       {cart.length === 0 ? (
         <EmptyCart />
       ) : (
-        <div>Cart content here</div>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8 w-full max-w-7xl mt-10">
+          <CartList cart={cart}/>
+          <CartSummary cart={cart}/>
+        </div>
       )}
     </motion.div>
   );
